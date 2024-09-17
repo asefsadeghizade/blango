@@ -55,12 +55,17 @@ class Dev(Configuration):
         "crispy_forms",
         "crispy_bootstrap5",
 
+        "debug_toolbar",
+
         "blog",
     ]
 
     #CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io']
 
     MIDDLEWARE = [
+
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -200,12 +205,16 @@ class Dev(Configuration):
       'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     ]
 
+
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             'LOCATION': 'unique-snowflake',
         }
     }
+
+
+    INTERNAL_IPS = ["192.168.10.226"]
 
 
 
