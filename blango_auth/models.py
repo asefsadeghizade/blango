@@ -39,7 +39,7 @@ class User(AbstractUser):
         unique=True
     )
 
-    objects = BlangoUserManager
+    objects = BlangoUserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
