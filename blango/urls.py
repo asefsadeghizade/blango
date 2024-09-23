@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("blog.urls")),
     path("", include("blango_auth.urls")),
+    path("accounts/", include("allauth.urls")),
 ]
 
 
