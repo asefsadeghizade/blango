@@ -53,6 +53,8 @@ class Dev(Configuration):
         "django.contrib.sites", 
         'django.contrib.staticfiles',
 
+        "rest_framework",
+
         "blango_auth",
 
         "crispy_forms",
