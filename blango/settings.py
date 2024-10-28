@@ -67,6 +67,8 @@ class Dev(Configuration):
         "allauth", "allauth.account", 
         "allauth.socialaccount", 
         "allauth.socialaccount.providers.google",
+
+        "rest_framework.authtoken",
     ]
 
     #CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io']
@@ -239,6 +241,14 @@ class Dev(Configuration):
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_USERNAME_REQUIRED = False
     ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+    REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+    }
 
 
 class Prod(Dev):
