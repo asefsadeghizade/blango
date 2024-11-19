@@ -69,6 +69,8 @@ class Dev(Configuration):
         "allauth.socialaccount.providers.google",
 
         "rest_framework.authtoken",
+
+        "drf_yasg",
     ]
 
     #CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io']
@@ -251,6 +253,13 @@ class Dev(Configuration):
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticatedOrReadOnly"
         ],
+    }
+
+    SWAGGER_SETTINGS = {
+        "SECURITY_DEFINITIONS": {
+            "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+            "Basic": {"type": "basic"},
+        }
     }
 
 
