@@ -74,6 +74,8 @@ class Dev(Configuration):
         "drf_yasg",
 
         "django_filters",
+
+        "versatileimagefield",
     ]
 
     #CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io']
@@ -90,8 +92,8 @@ class Dev(Configuration):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-        "django.middleware.cache.UpdateCacheMiddleware",
-        "django.middleware.cache.FetchFromCacheMiddleware",
+        # "django.middleware.cache.UpdateCacheMiddleware",
+        # "django.middleware.cache.FetchFromCacheMiddleware",
     ]
 
     ROOT_URLCONF = 'blango.urls'
@@ -222,12 +224,12 @@ class Dev(Configuration):
     ]
 
 
-    CACHES = {
+    ''' CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             'LOCATION': 'unique-snowflake',
         }
-    }
+    } '''
 
 
     INTERNAL_IPS = ["192.168.10.226"]
@@ -288,6 +290,11 @@ class Dev(Configuration):
         "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
         "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     }
+
+    MEDIA_ROOT = BASE_DIR / "media"
+    MEDIA_URL = "/media/"
+
+    
 
 
 class Prod(Dev):

@@ -3,6 +3,9 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
+from versatileimagefield.fields import VersatileImageField, PPOIField
+
+
 # Create your models here.
 
 class Tag(models.Model):
@@ -26,19 +29,24 @@ class Comment(models.Model):
 
 
 class Post(models.Model):
-  author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-  created_at = models.DateTimeField(auto_now_add=True, db_index=True)
-  modified_at = models.DateTimeField(auto_now=True)
-  published_at = models.DateTimeField(blank=True, null=True, db_index=True)
-  title = models.TextField(max_length=100)
-  slug = models.SlugField()
-  summary = models.TextField(max_length=500)
-  content = models.TextField(unique=True)
-  tags = models.ManyToManyField(Tag, related_name="posts")
-  comments = GenericRelation(Comment)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(blank=True, null=True, db_index=True)
+    title = models.TextField(max_length=100)
+    slug = models.SlugField()
+    summary = models.TextField(max_length=500)
+    content = models.TextField(unique=True)
+    tags = models.ManyToManyField(Tag, related_name="posts")
+    comments = GenericRelation(Comment)
 
-  def __str__(self):
-    return self.title
+    hero_image = VersatileImageField(
+        upload_to="hero_images", ppoi_field="ppoi", null=True, blank=True
+    )
+    ppoi = PPOIField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 class AuthorProfile(models.Model):
